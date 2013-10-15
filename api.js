@@ -1,15 +1,18 @@
-var express = require('express'),
-    http = require('http'),
-    path = require('path'),
-    async = require('async'),
-    request = require('request'),
+var request = require('request'),
     _ = require('lodash');
 
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.use(express.static(path.join(__dirname, 'public')));
+exports.artistSearchQuery = function(query) {
+  return function(callback) {
+    request({
+      url: 'http://ws.spotify.com/search/1/artist.json',
+      qs: { q: query }
+    }, function(err, response, body) {
+      callback(err, JSON.parse(body).artists);
+    });
+  };
+};
 
-var albumsLookup = function(uri) {
+exports.artistAlbumsQuery = function(uri) {
   return function(callback) {
     request({
       url: 'http://ws.spotify.com/lookup/1/.json',
@@ -41,11 +44,11 @@ var albumsLookup = function(uri) {
   };
 };
 
-var profileLookup = function(uri) {
-  var url = 'http://developer.echonest.com/api/v4/artist/profile?' +
-            'api_key=N1WQYA4MPBEWOP9UF&format=json&id=' + uri.replace(/^spotify:/, 'spotify-WW:') +
-            '&bucket=biographies&bucket=images&bucket=years_active&bucket=artist_location';
+exports.artistProfileQuery = function(uri) {
   return function(callback) {
+    var url = 'http://developer.echonest.com/api/v4/artist/profile?' +
+              'api_key=N1WQYA4MPBEWOP9UF&format=json&id=' + uri.replace(/^spotify:/, 'spotify-WW:') +
+              '&bucket=biographies&bucket=images&bucket=years_active&bucket=artist_location';
     request(url, function(err, response, body) {
       var artistData = JSON.parse(body).response.artist,
           profile = {};
@@ -66,26 +69,3 @@ var profileLookup = function(uri) {
     });
   };
 };
-
-app.get('/artist/search', function(req, res) {
-  request({
-    url: 'http://ws.spotify.com/search/1/artist.json',
-    qs: { q: req.query.q }
-  }, function(err, response, body) {
-    res.json(JSON.parse(body).artists);
-  });
-});
-
-app.get('/artist/lookup', function(req, res) {
-  var uri = req.query.uri;
-  async.parallel([albumsLookup(uri), profileLookup(uri)], function(err, results) {
-    var albums = results[0],
-        profile = results[1];
-    profile.albums = albums;
-    res.json(profile);
-  });
-});
-
-http.createServer(app).listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});

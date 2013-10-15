@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+<form class="search-form" data-bind="submit: search">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <button class="btn btn-primary btn-lg" type="submit">
+        <span class="glyphicon glyphicon-search"></span>
+        Artist Search
+      </button>
+    </span>
+    <input type="text" class="form-control input-lg" data-bind="value: searchQuery">
+  </div>
+</form>
+
+<ul class="search-results list-group" data-bind="foreach: searchResults, click: artistClicked">
+  <li class="list-group-item">
+    <a href="#" data-bind="text: name"></a>
+  </li>
+</ul>
+
+<div class="artist-page" data-bind="visible: shouldShowArtistPage, with: artist">
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
