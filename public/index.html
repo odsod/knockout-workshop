@@ -19,13 +19,13 @@
   </div>
 </form>
 
-<ul class="search-results list-group" data-bind="foreach: searchResults, click: artistClicked">
-  <li class="list-group-item">
-    <a href="#" data-bind="text: name"></a>
-  </li>
-</ul>
+<div class="search-results list-group" data-bind="foreach: searchResults, click: artistClicked">
+  <a class="list-group-item" href="#" data-bind="text: name"></a>
+</div>
 
-<div class="artist-page" data-bind="visible: shouldShowArtistPage, with: artist">
+<div class="overlay" data-bind="css: { show: shouldShowArtistPage }, click: hideArtistPage"></div>
+
+<div class="artist-page" data-bind="css: { show: shouldShowArtistPage }, with: artist">
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>

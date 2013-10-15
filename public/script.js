@@ -16,4 +16,9 @@ vm.artistClicked = function(_, e) {
   vm.shouldShowArtistPage(true);
 };
 
+vm.hideArtistPage = function() {
+  console.log('hej');
+  vm.shouldShowArtistPage(false);
+};
+
 ko.applyBindings(vm);
