@@ -2,6 +2,10 @@ html, body {
   height: 100%;
 }
 
+.search-page {
+  height: 100%;
+}
+
 .search-form {
   position: absolute;
   top: 0;
@@ -37,7 +41,7 @@ a {
   background: black;
   display: none;
   opacity: 0;
-  -webkit-transition: opacity 1s ease;
+  -webkit-transition: opacity 0.5s ease;
 }
 
 .overlay.show {
@@ -54,9 +58,37 @@ a {
   z-index: 100;
   background: white;
   box-shadow: -3px -1px 3px rgba(0, 0, 0, 0.2);
-  -webkit-transition: right 1s ease;
+  -webkit-transition: all 0.5s ease-in-out;
 }
 
 .artist-page.show {
   right: 0;
+}
+
+.artist-page.full {
+  right: 15%;
+}
+
+.artist-page img {
+  float: left;
+  max-height: 150px;
+  margin-right: 20px;
+}
+
+.divider {
+  clear: both;
+  margin: 0;
+  color: white;
+  background: #3776b1;
+  border: 1px solid #285e8e;
+  padding: 0.5em 1em;
+}
+
+h2 {
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+small {
+  margin-left: 20px;
 }

@@ -1,35 +1,12 @@
 var express = require('express'),
-    http = require('http'),
-    path = require('path'),
-    async = require('async'),
-    request = require('request'),
-    _ = require('lodash');
+    app = express().use(express.static(require('path').join(__dirname, 'public')));
 
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.use(express.static(path.join(__dirname, 'public')));
+require('http').createServer(app).listen(3001);
 
-var api = require('./api.js');
-
-app.get('/artist/search', function(req, res) {
-  api.artistSearchQuery(req.query.q)(function(err, searchResult) {
-    res.json(searchResult);
-  });
-});
-
-app.get('/artist/lookup', function(req, res) {
-  var uri = req.query.uri;
-  async.parallel([
-    api.artistAlbumsQuery(uri),
-    api.artistProfileQuery(uri)
-  ], function(err, results) {
-    var albums = results[0],
-        profile = results[1];
-    profile.albums = albums;
-    res.json(profile);
-  });
-});
-
-http.createServer(app).listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+require('http-proxy').createServer(function(req, res, proxy) {
+  if (/^\/(search|lookup)/.test(req.url)) {
+    proxy.proxyRequest(req, res, { host: 'ws.spotify.com', port: 80 });
+  } else {
+    proxy.proxyRequest(req, res, { host: 'localhost', port: 3001 });
+  }
+}).listen(3000);
