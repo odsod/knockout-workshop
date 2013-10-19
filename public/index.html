@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <title>Knockout.js Workshop</title>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
 </head>
@@ -41,7 +42,7 @@
   <h2 data-bind="text: albumName"></h2>
   <h4 class="divider">Tracks</h4>
   <div class="list-group" data-bind="foreach: albumTracks">
-    <a class="list-group-item" href="#">
+    <a class="list-group-item">
       <!-- ko text: name --><!-- /ko -->
     </a>
   </div>
