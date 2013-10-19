@@ -4,6 +4,7 @@ html, body {
 
 .search-page {
   height: 100%;
+  position: relative;
 }
 
 .search-form {
@@ -12,7 +13,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 45px;
-  z-index: 99;
+  z-index: 5;
   box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -38,15 +39,8 @@ a {
   width: 100%;
   height: 100%;
   z-index: 99;
-  background: black;
-  display: none;
-  opacity: 0;
+  background: rgba(0, 0, 0, 0.3);
   -webkit-transition: opacity 0.5s ease;
-}
-
-.overlay.show {
-  display: block;
-  opacity: 0.4;
 }
 
 .artist-page {

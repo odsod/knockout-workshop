@@ -32,8 +32,23 @@ vm.artistAlbums = ko.observable();
 vm.albumName = ko.observable();
 vm.albumTracks = ko.observable();
 
-vm.shouldShowArtistPage = ko.observable();
-vm.shouldShowAlbumPage = ko.observable();
+vm.state = ko.observable('search');
+
+vm.artistZ = 10;
+vm.albumZ = 20;
+vm.overlayZ = ko.computed(function() {
+  switch (vm.state()) {
+    case 'album': return vm.albumZ - 1;
+    case 'artist': return vm.artistZ - 1;
+  }
+});
+
+vm.back = function() {
+  switch (vm.state()) {
+    case 'album': vm.state('artist'); break;
+    case 'artist': vm.state('search'); break;
+  }
+};
 
 vm.onSearch = function() {
   artistSearch(vm.searchQuery(), vm.searchResults);
@@ -43,15 +58,15 @@ vm.onArtistClick = function(artist) {
   artistLookup(artist.href, function(artist) {
     vm.artistName(artist.name);
     vm.artistAlbums(artist.albums);
-    vm.shouldShowArtistPage(true);
+    vm.state('artist');
   });
 };
 
 vm.onAlbumClick = function(album) {
   albumLookup(album.href, function(album) {
-    vm.shouldShowAlbumPage(true);
     vm.albumName(album.name);
     vm.albumTracks(album.tracks);
+    vm.state('album');
   });
 };
 

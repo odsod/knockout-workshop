@@ -23,7 +23,9 @@
   </div>
 </div>
 
-<div class="artist-page" data-bind="css: { show: shouldShowArtistPage, full: shouldShowAlbumPage }">
+<div class="artist-page" data-bind="
+  css: { show: state() === 'artist', full: state() === 'album' }, style: { 'z-index': artistZ }
+">
   <h2 data-bind="text: artistName"></h2>
   <h4 class="divider">Albums</h4>
   <div class="list-group" data-bind="foreach: artistAlbums">
@@ -33,7 +35,9 @@
   </div>
 </div>
 
-<div class="artist-page" data-bind="css: { show: shouldShowAlbumPage }">
+<div class="artist-page" data-bind="
+  css: { show: state() === 'album' }, style: { 'z-index': albumZ }
+">
   <h2 data-bind="text: albumName"></h2>
   <h4 class="divider">Tracks</h4>
   <div class="list-group" data-bind="foreach: albumTracks">
@@ -42,6 +46,8 @@
     </a>
   </div>
 </div>
+
+<div class="overlay" data-bind="style: { 'z-index': overlayZ }, visible: state() !== 'search', click: back"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
