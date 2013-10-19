@@ -36,7 +36,10 @@
 <div class="artist-page" data-bind="css: { show: shouldShowAlbumPage }">
   <h2 data-bind="text: albumName"></h2>
   <h4 class="divider">Tracks</h4>
-  <div class="list-group" data-bind="">
+  <div class="list-group" data-bind="foreach: albumTracks">
+    <a class="list-group-item" href="#">
+      <!-- ko text: name --><!-- /ko -->
+    </a>
   </div>
 </div>
 
