@@ -1,10 +1,11 @@
 html, body {
   height: 100%;
+  overflow: hidden;
 }
 
-.search-page {
+.search-page, .popout {
   height: 100%;
-  position: relative;
+  overflow: scroll;
 }
 
 .search-form {
@@ -17,20 +18,11 @@ html, body {
   box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
-.search-form input, .search-form button {
-  border-radius: 0;
-}
-
-.search-results {
-  border-radius: 0;
-  padding-top: 45px;
-  height: 100%;
-  overflow: scroll;
-}
-
-a {
+.search-form input, .search-form button, .list-group a {
   border-radius: 0 !important;
 }
+
+.search-results { padding-top: 45px; }
 
 .overlay {
   position: absolute;
@@ -38,51 +30,32 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
   background: rgba(0, 0, 0, 0.3);
-  -webkit-transition: opacity 0.5s ease;
 }
 
-.artist-page {
+.popout {
   position: absolute;
   top: 0;
   right: -100%;
-  width: 85%;
   height: 100%;
-  z-index: 100;
+  width: 85%;
   background: white;
   box-shadow: -3px -1px 3px rgba(0, 0, 0, 0.2);
   -webkit-transition: all 0.5s ease-in-out;
 }
 
-.artist-page.show {
-  right: 0;
-}
+.popout.show { right: 0; }
+.popout.behind { right: 15%; }
 
-.artist-page.full {
-  right: 15%;
-}
-
-.artist-page img {
-  float: left;
-  max-height: 150px;
-  margin-right: 20px;
-}
-
-.divider {
-  clear: both;
+h4 {
   margin: 0;
+  padding: 0.5em 15px;
   color: white;
   background: #3776b1;
   border: 1px solid #285e8e;
-  padding: 0.5em 1em;
 }
 
 h2 {
   margin: 0;
-  padding: 0.5em 1em;
-}
-
-small {
-  margin-left: 20px;
+  padding: 0.5em 15px;
 }

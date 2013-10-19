@@ -24,11 +24,11 @@
   </div>
 </div>
 
-<div class="artist-page" data-bind="
-  css: { show: state() === 'artist', full: state() === 'album' }, style: { 'z-index': artistZ }
+<div class="popout" data-bind="
+  css: { show: state() === 'artist', behind: state() === 'album' }, style: { 'z-index': artistZ }
 ">
   <h2 data-bind="text: artistName"></h2>
-  <h4 class="divider">Albums</h4>
+  <h4>Albums</h4>
   <div class="list-group" data-bind="foreach: artistAlbums">
     <a class="list-group-item" href="#" data-bind="click: $root.onAlbumClick">
       <!-- ko text: name --><!-- /ko --> (<!-- ko text: released --><!-- /ko -->)
@@ -36,11 +36,11 @@
   </div>
 </div>
 
-<div class="artist-page" data-bind="
+<div class="popout" data-bind="
   css: { show: state() === 'album' }, style: { 'z-index': albumZ }
 ">
   <h2 data-bind="text: albumName"></h2>
-  <h4 class="divider">Tracks</h4>
+  <h4>Tracks</h4>
   <div class="list-group" data-bind="foreach: albumTracks">
     <a class="list-group-item">
       <!-- ko text: name --><!-- /ko -->
