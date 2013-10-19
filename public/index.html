@@ -20,7 +20,7 @@
     </div>
   </form>
   <div class="search-results list-group" data-bind="foreach: searchResults">
-    <a class="list-group-item" href="#" data-bind="text: name, click: $root.onArtistClick"></a>
+    <a class="list-group-item" data-bind="text: name, click: $root.onArtistClick"></a>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
   <h2 data-bind="text: albumName"></h2>
   <h4>Tracks</h4>
   <div class="list-group" data-bind="foreach: albumTracks">
-    <a class="list-group-item">
+    <a class="list-group-item" data-bind="attr: { href: href }">
       <!-- ko text: name --><!-- /ko -->
     </a>
   </div>
